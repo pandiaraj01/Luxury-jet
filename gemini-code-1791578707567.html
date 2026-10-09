@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Aviation | Global Private Jet Charter</title>
+    
+    <!-- PWA Mobile App Meta Tags -->
+    <meta name="theme-color" content="#D4AF37">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { DEFAULT: '#D4AF37', light: '#E6C667', dark: '#AA8C2C' },
+                        dark: { 900: '#07090E', 800: '#0B0F19', 700: '#141A29', 600: '#1F293D' }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-dark-900 text-gray-100 font-sans antialiased selection:bg-gold selection:text-black">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-jet-fighter text-gold text-2xl"></i>
+                <span class="text-xl font-bold tracking-widest text-white uppercase">Apex <span class="text-gold">Aviation</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wider uppercase text-gray-300">
+                <a href="#search" class="hover:text-gold transition">Book Flight</a>
+                <a href="#fleet" class="hover:text-gold transition">Our Fleet</a>
+            </nav>
+            <div>
+                <button onclick="document.getElementById('search').scrollIntoView({behavior: 'smooth'})" class="bg-gold hover:bg-gold-light text-black font-semibold px-6 py-2.5 rounded-full text-sm uppercase tracking-wider transition shadow-lg shadow-gold/20">
+                    Charter Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section & Interactive Booking Bar -->
+    <section id="search" class="relative pt-32 pb-20 md:pt-44 md:pb-32 bg-[url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-dark-900/30"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 text-center">
+            <span class="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-3 inline-block">India & International Private Jet Solutions</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">Your Private Sky, On Demand</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-12 text-sm md:text-base">Instant access to certified domestic (DEL, BOM) and global aircraft with 24/7 VIP concierge services.</p>
+
+            <!-- Booking Widget Card -->
+            <div class="bg-dark-700/90 backdrop-blur-xl border border-white/10 p-6 md:p-8 rounded-2xl shadow-2xl max-w-5xl mx-auto text-left">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-medium">From (Airport IATA)</label>
+                        <input type="text" id="depAirport" placeholder="e.g. BOM or JFK" class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-medium">To (Airport IATA)</label>
+                        <input type="text" id="arrAirport" placeholder="e.g. DXB or LHR" class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-medium">Departure Date</label>
+                        <input type="date" id="flightDate" class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-medium">Currency</label>
+                        <select id="currencySelect" class="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold" onchange="updateCurrencySymbol()">
+                            <option value="USD">USD ($ International)</option>
+                            <option value="INR">INR (₹ India)</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="handleInstantSearch()" class="w-full bg-gold hover:bg-gold-light text-black font-bold uppercase tracking-widest py-4 rounded-xl transition duration-300 shadow-lg shadow-gold/20 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search Live Availability & Quotes</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Showroom Section -->
+    <section id="fleet" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <span class="text-gold uppercase tracking-[0.3em] text-xs font-semibold mb-2 block">World-Class Fleet</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Curated Aircraft Categories</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-dark-800 border border-white/10 rounded-2xl overflow-hidden group hover:border-gold/50 transition">
+                <div class="h-60 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=800" alt="Light Jet" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-dark-900/80 backdrop-blur-md text-gold text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Light Jet</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Phenom 300E / Citation CJ3</h3>
+                    <p class="text-gray-400 text-sm mb-6">Ideal for short-to-mid regional hops (e.g., Mumbai to Goa).</p>
+                    <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+                        <span><i class="fa-solid fa-user-group text-gold mr-1"></i> Up to 7 Pax</span>
+                        <span class="text-gold font-bold text-sm fleet-price" data-usd="4,200" data-inr="3,50,000">$4,200 / hr</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-dark-800 border border-white/10 rounded-2xl overflow-hidden group hover:border-gold/50 transition">
+                <div class="h-60 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800" alt="Midsize Jet" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-dark-900/80 backdrop-blur-md text-gold text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Midsize Jet</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Citation Latitude / Challenger 350</h3>
+                    <p class="text-gray-400 text-sm mb-6">Stand-up cabin space, transcontinental range (e.g., Delhi to Dubai).</p>
+                    <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+                        <span><i class="fa-solid fa-user-group text-gold mr-1"></i> Up to 9 Pax</span>
+                        <span class="text-gold font-bold text-sm fleet-price" data-usd="6,800" data-inr="5,60,000">$6,800 / hr</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-dark-800 border border-white/10 rounded-2xl overflow-hidden group hover:border-gold/50 transition">
+                <div class="h-60 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1520454974749-611b7248feaf?auto=format&fit=crop&q=80&w=800" alt="Heavy Jet" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-dark-900/80 backdrop-blur-md text-gold text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Heavy Jet</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Gulfstream G650 / Global 7500</h3>
+                    <p class="text-gray-400 text-sm mb-6">Intercontinental range, private suites (e.g., New York to London).</p>
+                    <div class="flex justify-between items-center text-xs text-gray-400 border-t border-white/10 pt-4">
+                        <span><i class="fa-solid fa-user-group text-gold mr-1"></i> Up to 16 Pax</span>
+                        <span class="text-gold font-bold text-sm fleet-price" data-usd="11,500" data-inr="9,50,000">$11,500 / hr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-800 border-t border-white/10 py-12 text-center text-xs text-gray-500">
+        <p>&copy; 2026 Apex Aviation Inc. All rights reserved. ARGUS Platinum Certified.</p>
+    </footer>
+
+    <!-- Booking Modal / Payment Gateways -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-dark-700 border border-white/10 max-w-lg w-full p-8 rounded-2xl shadow-2xl relative">
+            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-2xl font-bold text-white mb-2">Secure Flight Checkout</h3>
+            <p class="text-gray-400 text-sm mb-6">Select your preferred payment gateway to secure your charter flight.</p>
+            
+            <div class="space-y-4 mb-6">
+                <button onclick="processPayment('stripe')" class="w-full bg-dark-800 hover:border-gold border border-white/10 p-4 rounded-xl flex items-center justify-between transition">
+                    <span class="text-white font-bold"><i class="fa-brands fa-stripe text-indigo-400 text-xl mr-3"></i> Pay with Stripe (USD / Cards / ACH)</span>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </button>
+                <button onclick="processPayment('cashfree')" class="w-full bg-dark-800 hover:border-gold border border-white/10 p-4 rounded-xl flex items-center justify-between transition">
+                    <span class="text-white font-bold"><i class="fa-solid fa-shield-halved text-emerald-400 text-xl mr-3"></i> Pay with Cashfree (INR / UPI / Cards)</span>
+                    <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Handlers -->
+    <script>
+        function handleInstantSearch() {
+            const dep = document.getElementById('depAirport').value.trim().toUpperCase();
+            const arr = document.getElementById('arrAirport').value.trim().toUpperCase();
+            const currency = document.getElementById('currencySelect').value;
+            const date = document.getElementById('flightDate').value;
+            
+            if(!dep || !arr || !date) {
+                alert('Please enter departure airport, arrival airport, and date.');
+                return;
+            }
+            alert(`Live schedule verified: Route ${dep} ✈ ${arr} on ${date}. Opening ${currency} payment gateways.`);
+            triggerCheckoutModal();
+        }
+
+        function updateCurrencySymbol() {
+            const curr = document.getElementById('currencySelect').value;
+            const prices = document.querySelectorAll('.fleet-price');
+            prices.forEach(el => {
+                if(curr === 'INR') {
+                    el.innerText = '₹' + el.getAttribute('data-inr') + ' / hr';
+                } else {
+                    el.innerText = '$' + el.getAttribute('data-usd') + ' / hr';
+                }
+            });
+        }
+
+        function triggerCheckoutModal() {
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function processPayment(gateway) {
+            if(gateway === 'stripe') {
+                alert('Redirecting to secure Stripe checkout session (USD)...');
+            } else {
+                alert('Launching Cashfree payment modal (INR / UPI)...');
+            }
+        }
+    </script>
+</body>
+</html>
